@@ -1,5 +1,6 @@
 import express from 'express';
-import productRouter from './Routes/productRouter';
+import ProductRouter from './Routes/ProductsRouter';
+import LoginRouter from './Routes/LoginRouter';
 
 export default class App {
   public app: express.Express;
@@ -24,7 +25,8 @@ export default class App {
   }
 
   private routes(): void {
-    this.app.use('/product', productRouter);
+    this.app.use('/product', ProductRouter);
+    this.app.use('/auth/login', LoginRouter);
   }
 
   public start(PORT: string | number):void {

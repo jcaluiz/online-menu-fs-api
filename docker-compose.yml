@@ -35,6 +35,7 @@ services:
     environment:
       - MONGO_URI=mongodb://mongodb:27017/OnlineMenu
       - APP_PORT=3001
+      - JWT_SECRET=jwt_secret
 
    # Serviço que irá rodar o mongodb
   mongodb:
