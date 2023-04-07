@@ -1,13 +1,38 @@
-import { Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import ProductsController from '../Controllers/ProductsController';
 import Authorization from '../Middlewares/Authorization';
+import ErrorHandler from '../Middlewares/ErrorHandler';
 
 const router = Router();
 
 router.get(
   '/',
-  (req, res, next) => new Authorization(req, res, next).authentication(),
-  ProductsController.test,
+  (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => new Authorization(req, res, next).authentication(),
+  (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => new ProductsController(req, res, next).getProducts(),
+  ErrorHandler.handle,
+);
+
+router.post(
+  '/',
+  (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => new Authorization(req, res, next).authentication(),
+  (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => new ProductsController(req, res, next).registerProducts(),
+  ErrorHandler.handle,
 );
 
 export default router;

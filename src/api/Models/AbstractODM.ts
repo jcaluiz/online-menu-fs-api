@@ -22,6 +22,10 @@ export default abstract class AbstractODM<T> {
     return this.model.create({ ...obj });
   }
 
+  public async findAll() {
+    return this.model.find({});
+  }
+
   public async findById(id: string) {
     return this.model.findById(id);
   }

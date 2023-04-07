@@ -1,6 +1,7 @@
 import express from 'express';
 import ProductRouter from './Routes/ProductsRouter';
 import LoginRouter from './Routes/LoginRouter';
+import connectToDatabase from './Models/Connection';
 
 export default class App {
   public app: express.Express;
@@ -10,6 +11,7 @@ export default class App {
 
     this.config();
     this.routes();
+    connectToDatabase();
   }
 
   private config():void {

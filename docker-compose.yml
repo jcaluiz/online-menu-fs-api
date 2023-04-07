@@ -33,7 +33,7 @@ services:
       - 3001:3001
     # Configura as variáveis de ambiente dentro do container
     environment:
-      - MONGO_URI=mongodb://172.21.0.3:27017/OnlineMenu
+      - MONGO_URI=mongodb://online_menu_db:27017/OnlineMenu
       - APP_PORT=3001
       - JWT_SECRET=jwt_secret
 
@@ -42,7 +42,8 @@ services:
     image: mongo:5.0.7
     container_name: online_menu_db
     volumes:
-      - ./:/app
+      # Mapeia o diretório /data/db do container para o diretório ./data/db na máquina host
+      - ./data/db:/data/db
     restart: always
     ports:
       # Garanta que não haverá conflitos de porta com um mongodb que esteja

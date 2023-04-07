@@ -1,19 +1,17 @@
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
-const MONGO_DB_URL = 'mongodb://localhost:27017/OnlineMenu';
+const MONGO_DB_URL = 'mongodb://online_menu_db:27017/OnlineMenu';
 
 const options = {
-  bufferMaxEntries: 0,
   useNewUrlParser: true,
   useUnifiedTopology: true,
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  serverSelectionTimeoutMS: 5000, // aumenta o tempo limite para 5 segundos
+  connectTimeoutMS: 30000, // aumenta o tempo limite para 30 segundos
 };
 
-const connectToDatabase = async (
-  mongoDatabaseURI = MONGO_DB_URL,
-) => mongoose.connect(mongoDatabaseURI, options).then(() => console.log('connected'))
-  .catch((e) => console.log(e));
+const connectToDatabase = (
+  mongoDatabaseURI = process.env.MONGO_URI || MONGO_DB_URL,
+) => mongoose.connect(mongoDatabaseURI, options);
 
 export default connectToDatabase;
