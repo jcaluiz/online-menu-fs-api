@@ -48,11 +48,27 @@ export default class ProductService {
     try {
       if (!id) throw new HttpException(statusCodes.notFound, 'Id Not Found');
       const product = await this.productODM.findById(id);
+      console.log(product);
       if (!product) throw new HttpException(statusCodes.unprocessable, 'Invalid Id');
       return { code: statusCodes.ok, message: ProductService.productDomain(product) };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      throw new HttpException(statusCodes.unprocessable, error.message);
+      throw new HttpException(error.status, error.message);
+    }
+  }
+
+  public async updateProduct(id: string, product: IProduct) {
+    try {
+      if (!id) throw new HttpException(statusCodes.notFound, 'Id Not Found');
+      if (Object.keys(product).length < 4) {
+        throw new HttpException(statusCodes.notFound, 'Product is empty or an item is missing');
+      }
+      const updatedProduct = await this.productODM.update(id, product);
+      if (!updatedProduct) throw new HttpException(statusCodes.notFound, 'Product Not Found');
+      return { code: statusCodes.ok, message: ProductService.productDomain(updatedProduct) };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      throw new HttpException(error.status, error.message);
     }
   }
 }

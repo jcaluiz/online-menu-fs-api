@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { Schema, UpdateQuery } from 'mongoose';
 import { IProduct } from '../Interfaces/IProduct';
 import AbstractODM from './AbstractODM';
 
@@ -24,6 +24,18 @@ export default class ProductODM extends AbstractODM<IProduct> {
   public async findById(id: string) {
     try {
       return await this.model.findById(id);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  public async update(id: string, product: IProduct) {
+    try {
+      return await this.model.findOneAndUpdate(
+        { _id: id },
+        { ...product } as UpdateQuery<IProduct>,
+        { new: true },
+      );
     } catch (error) {
       return null;
     }

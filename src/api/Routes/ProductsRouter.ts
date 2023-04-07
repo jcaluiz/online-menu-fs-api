@@ -50,4 +50,19 @@ router.post(
   ErrorHandler.handle,
 );
 
+router.patch(
+  '/:id',
+  (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => new Authorization(req, res, next).authentication(),
+  (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => new ProductsController(req, res, next).updateProduct(),
+  ErrorHandler.handle,
+);
+
 export default router;

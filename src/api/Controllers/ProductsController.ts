@@ -42,4 +42,14 @@ export default class ProductsController {
       this.next(error);
     }
   }
+
+  public async updateProduct() {
+    try {
+      const { params: { id }, body } = this.req;
+      const { code, message } = await this.service.updateProduct(id, body);
+      return this.res.status(code).json(message);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
