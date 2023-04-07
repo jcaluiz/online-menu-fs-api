@@ -3,7 +3,7 @@ import 'dotenv/config';
 import IUser from '../Interfaces/IUser';
 
 export default class Token {
-  static createToken = (user: IUser): string => {
+  public createToken = (user: IUser): string => {
     const secret = process.env.JWT_SECRET || 'jwt_secret';
     const token = jwt.sign(user, secret, {
       expiresIn: '1d',
@@ -12,13 +12,19 @@ export default class Token {
     return token;
   };
 
-  static isTokenValid = (token: string) => {
+  public isTokenValid = (token: string) => {
     try {
       const secret = process.env.JWT_SECRET || 'jwt_secret';
       const data = jwt.verify(token, secret);
       return { validated: true, message: data };
-    } catch (error) {
-      throw new Error('Invalid Token');
+    } catch (error: any) {
+      return { validated: false, message: 'Invalid Token' };
     }
+  };
+
+  public decode = (auth: string) => {
+    const secret = process.env.JWT_SECRET || 'jwt_secret';
+    const decoded = jwt.verify(auth, secret) as string;
+    return decoded;
   };
 }
