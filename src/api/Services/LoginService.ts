@@ -1,6 +1,6 @@
 import IUser from '../Interfaces/IUser';
 import Token from '../Middlewares/Token';
-import statusCodes from '../statusCodes';
+import statusCodes from '../shared/statusCodes';
 import HttpException from '../Utils/HttpException';
 
 export default class LoginService {

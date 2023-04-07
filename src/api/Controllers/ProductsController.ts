@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import statusCodes from '../statusCodes';
+import statusCodes from '../shared/statusCodes';
 
 export default class ProductsController {
   static async test(

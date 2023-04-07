@@ -17,7 +17,7 @@ export default class Token {
       const secret = process.env.JWT_SECRET || 'jwt_secret';
       const data = jwt.verify(token, secret);
       return { validated: true, message: data };
-    } catch (error: any) {
+    } catch (error) {
       return { validated: false, message: 'Invalid Token' };
     }
   };
