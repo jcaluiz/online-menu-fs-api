@@ -20,4 +20,12 @@ export default class ProductODM extends AbstractODM<IProduct> {
   public async create(product: IProduct): Promise<IProduct> {
     return this.model.create(product);
   }
+
+  public async findById(id: string) {
+    try {
+      return await this.model.findById(id);
+    } catch (error) {
+      return null;
+    }
+  }
 }

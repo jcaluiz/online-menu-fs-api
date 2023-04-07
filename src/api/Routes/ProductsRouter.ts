@@ -20,6 +20,21 @@ router.get(
   ErrorHandler.handle,
 );
 
+router.get(
+  '/:id',
+  (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => new Authorization(req, res, next).authentication(),
+  (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => new ProductsController(req, res, next).getProductById(),
+  ErrorHandler.handle,
+);
+
 router.post(
   '/',
   (

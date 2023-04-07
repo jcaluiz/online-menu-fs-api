@@ -20,7 +20,7 @@ export default class ProductsController {
       const { code, message } = await this.service.getProducts();
       return this.res.status(code).json(message);
     } catch (error) {
-      this.next();
+      this.next(error);
     }
   }
 
@@ -29,7 +29,17 @@ export default class ProductsController {
       const { code, message } = await this.service.registerProducts(this.req.body);
       return this.res.status(code).json(message);
     } catch (error) {
-      this.next();
+      this.next(error);
+    }
+  }
+
+  public async getProductById() {
+    try {
+      const { id } = this.req.params;
+      const { code, message } = await this.service.getProductById(id);
+      return this.res.status(code).json(message);
+    } catch (error) {
+      this.next(error);
     }
   }
 }

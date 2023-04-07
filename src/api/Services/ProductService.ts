@@ -41,6 +41,18 @@ export default class ProductService {
 
   public async registerProducts(product: IProduct) {
     const registeredProduct = await this.productODM.create(product);
-    return { code: statusCodes.ok, message: registeredProduct };
+    return { code: statusCodes.ok, message: ProductService.productDomain(registeredProduct) };
+  }
+
+  public async getProductById(id: string) {
+    try {
+      if (!id) throw new HttpException(statusCodes.notFound, 'Id Not Found');
+      const product = await this.productODM.findById(id);
+      if (!product) throw new HttpException(statusCodes.unprocessable, 'Invalid Id');
+      return { code: statusCodes.ok, message: ProductService.productDomain(product) };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      throw new HttpException(statusCodes.unprocessable, error.message);
+    }
   }
 }
