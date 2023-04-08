@@ -40,4 +40,14 @@ export default class ProductODM extends AbstractODM<IProduct> {
       return null;
     }
   }
+
+  public async delete(id: string) {
+    try {
+      return await this.model.findOneAndDelete(
+        { _id: id },
+      );
+    } catch (error) {
+      return null;
+    }
+  }
 }

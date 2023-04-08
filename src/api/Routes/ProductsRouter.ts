@@ -65,4 +65,19 @@ router.patch(
   ErrorHandler.handle,
 );
 
+router.delete(
+  '/:id',
+  (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => new Authorization(req, res, next).authentication(),
+  (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => new ProductsController(req, res, next).deleteProduct(),
+  ErrorHandler.handle,
+);
+
 export default router;

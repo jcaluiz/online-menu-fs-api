@@ -52,4 +52,14 @@ export default class ProductsController {
       this.next(error);
     }
   }
+
+  public async deleteProduct() {
+    try {
+      const { params: { id } } = this.req;
+      const { code, message } = await this.service.deleteProduct(id);
+      return this.res.status(code).json(message);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
