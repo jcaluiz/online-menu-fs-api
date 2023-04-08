@@ -2,7 +2,7 @@ import { Model, Schema, isValidObjectId, model, models } from 'mongoose';
 
 export default abstract class AbstractODM<T> {
   protected schema: Schema;
-  protected model: Model<T>;
+  public model: Model<T>;
   protected modelName: string;
 
   public static isTheIdValid(id: string | undefined): boolean {
@@ -18,7 +18,7 @@ export default abstract class AbstractODM<T> {
     this.model = models[this.modelName] || model(this.modelName, this.schema);
   }
 
-  public async create(obj: T): Promise<T | void> {
+  public async create(obj: T | T[]): Promise<T | T[] | void> {
     return this.model.create({ ...obj });
   }
 

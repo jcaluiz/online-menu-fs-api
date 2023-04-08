@@ -31,12 +31,16 @@ export default class ProductService {
   public async getProducts() {
     try {
       const allProducts = await this.productODM.findAll();
+      if (allProducts.length < 1) {
+        throw new HttpException(statusCodes.notFound, 'The Product Collection is empty');
+      }
       return {
         code: statusCodes.ok,
         message: allProducts.map((product) => ProductService.productDomain(product)),
       };
-    } catch (error) {
-      throw new HttpException(statusCodes.notFound, 'Products Not Found');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      throw new HttpException(error.status, error.message);
     }
   }
 

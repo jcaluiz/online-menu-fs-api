@@ -1,6 +1,7 @@
 import express from 'express';
 import ProductRouter from './Routes/ProductsRouter';
 import LoginRouter from './Routes/LoginRouter';
+import CategoryRouter from './Routes/CategoryRouter';
 import connectToDatabase from './Models/Connection';
 
 export default class App {
@@ -29,6 +30,7 @@ export default class App {
   private routes(): void {
     this.app.use('/product', ProductRouter);
     this.app.use('/auth/login', LoginRouter);
+    this.app.use('/category', CategoryRouter);
   }
 
   public start(PORT: string | number):void {

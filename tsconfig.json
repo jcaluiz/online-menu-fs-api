@@ -10,13 +10,24 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "typeRoots": [
       "./node_modules/@types",
       "./custom-typings"
     ]
   },
-  "include": ["jsonwebtoken.d.ts", "src/**/*"], /* aqui estamos incluindo todos os arquivos dentro da pasta src */
-  "exclude": ["node_modules", "**/*.spec.ts"], /* aqui estamos excluindo a pasta node_modules e os arquivos de teste */
-  "files": ["jsonwebtoken.d.ts"],
-  "types": ["jsonwebtoken"]
+  "include": [
+    "jsonwebtoken.d.ts",
+    "src/**/*"
+  ], /* aqui estamos incluindo todos os arquivos dentro da pasta src */
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ], /* aqui estamos excluindo a pasta node_modules e os arquivos de teste */
+  "files": [
+    "jsonwebtoken.d.ts"
+  ],
+  "types": [
+    "jsonwebtoken"
+  ]
 }

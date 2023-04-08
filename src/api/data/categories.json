@@ -1,0 +1,146 @@
+[
+    {
+        "id": "6431f2ab5bd691e475de8aad",
+        "parent": null,
+        "name": "Bebidas"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8aae",
+        "parent": null,
+        "name": "Almoço"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8aaf",
+        "parent": null,
+        "name": "Sobremesas"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8ab0",
+        "parent": {
+            "parent": null,
+            "name": "Bebidas"
+        },
+        "name": "Refrigerantes"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8ab1",
+        "parent": {
+            "parent": null,
+            "name": "Bebidas"
+        },
+        "name": "Sucos Naturais"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8ab2",
+        "parent": {
+            "parent": null,
+            "name": "Bebidas"
+        },
+        "name": "Água Mineral"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8ab3",
+        "parent": {
+            "parent": null,
+            "name": "Bebidas"
+        },
+        "name": "Chás"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8ab4",
+        "parent": {
+            "parent": null,
+            "name": "Bebidas"
+        },
+        "name": "Cafés"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8ab5",
+        "parent": {
+            "parent": null,
+            "name": "Almoço"
+        },
+        "name": "Pratos Principais"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8ab6",
+        "parent": {
+            "parent": {
+                "parent": null,
+                "name": "Almoço"
+            },
+            "name": "Pratos Principais"
+        },
+        "name": "Carne"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8ab7",
+        "parent": {
+            "parent": {
+                "parent": null,
+                "name": "Almoço"
+            },
+            "name": "Pratos Principais"
+        },
+        "name": "Frango"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8ab8",
+        "parent": {
+            "parent": {
+                "parent": null,
+                "name": "Almoço"
+            },
+            "name": "Pratos Principais"
+        },
+        "name": "Peixe"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8ab9",
+        "parent": {
+            "parent": null,
+            "name": "Almoço"
+        },
+        "name": "Saladas"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8aba",
+        "parent": {
+            "parent": null,
+            "name": "Almoço"
+        },
+        "name": "Sopas"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8abb",
+        "parent": {
+            "parent": null,
+            "name": "Almoço"
+        },
+        "name": "Acompanhamentos"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8abc",
+        "parent": {
+            "parent": null,
+            "name": "Sobremesas"
+        },
+        "name": "Bolos"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8abd",
+        "parent": {
+            "parent": null,
+            "name": "Sobremesas"
+        },
+        "name": "Sorvetes"
+    },
+    {
+        "id": "6431f2ab5bd691e475de8abe",
+        "parent": {
+            "parent": null,
+            "name": "Sobremesas"
+        },
+        "name": "Pudins"
+    }
+]
