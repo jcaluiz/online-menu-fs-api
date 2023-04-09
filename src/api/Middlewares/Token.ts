@@ -5,7 +5,8 @@ import IUser from '../Interfaces/IUser';
 export default class Token {
   public createToken = (user: IUser): string => {
     const secret = process.env.JWT_SECRET || 'jwt_secret';
-    const token = jwt.sign(user, secret, {
+    const { username, email } = user;
+    const token = jwt.sign({ username, email }, secret, {
       expiresIn: '1d',
       algorithm: 'HS256',
     });
