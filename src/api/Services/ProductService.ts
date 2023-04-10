@@ -52,9 +52,9 @@ export default class ProductService {
     }
   }
 
-  private async findCategoryName(product: IProduct) {
+  public async findByCategoryName(product: IProduct) {
     const categories = await Promise.all(product.categories.map(async (item: ICategory) => {
-      const findCategory = await this.categoryODM.findCategoryName(item.name);
+      const findCategory = await this.categoryODM.findByCategoryName(item.name);
       const formatCategory: Category | null = CategoryService.categoryDomain(findCategory[0]);
       return { name: '', parent: null, ...formatCategory };
     }));
@@ -62,8 +62,9 @@ export default class ProductService {
   }
 
   public async registerProducts(product: IProduct) {
+    // console.log(product);
     try {
-      const categories = await new ProductService().findCategoryName(product);
+      const categories = await new ProductService().findByCategoryName(product);
       const registered = await this.productODM.create({ ...product, categories });
       const productFormat = {
         id: registered._id,
@@ -72,6 +73,7 @@ export default class ProductService {
         qty: registered.qty,
         price: registered.price,
       };
+      console.log(registered);
       return { code: statusCodes.created, message: productFormat };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -98,7 +100,7 @@ export default class ProductService {
       if (Object.keys(product).length < 4) {
         throw new HttpException(statusCodes.notFound, 'Product is empty or an item is missing');
       }
-      const categories = await new ProductService().findCategoryName(product);
+      const categories = await new ProductService().findByCategoryName(product);
       const updatedProduct = await this.productODM.update(id, { ...product, categories });
       console.log(updatedProduct);
       if (!updatedProduct) throw new HttpException(statusCodes.notFound, 'Product Not Found');

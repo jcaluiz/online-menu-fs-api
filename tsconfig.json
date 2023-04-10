@@ -8,17 +8,31 @@
     "preserveConstEnums": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "declaration": true,
     "typeRoots": [
       "./node_modules/@types",
       "./custom-typings"
+    ],
+    "types": [
+      "node",
+      "chai",
+      "chai-as-promised",
+      "./global.d.ts",
+      "jest"
     ]
+  },
+  "global": {
+    "expect": true
   },
   "include": [
     "jsonwebtoken.d.ts",
-    "src/**/*"
+    "src/**/*",
+    "babel.config.js",
+    "src/__tests__/**/*"
   ], /* aqui estamos incluindo todos os arquivos dentro da pasta src */
   "exclude": [
     "node_modules",
@@ -28,6 +42,6 @@
     "jsonwebtoken.d.ts"
   ],
   "types": [
-    "jsonwebtoken"
+    "jsonwebtoken",
   ]
 }

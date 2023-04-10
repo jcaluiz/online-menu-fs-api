@@ -75,7 +75,14 @@
 <details>
   <summary><strong>🛠 Execução de testes localmente</strong></summary>
 
-  Em breve será desenvolvido os testes
+  Para executar os testes, basta digitar o seguinte script no seu terminal:
+
+  ~~~bash
+  npm test
+  ~~~
+
+  - Lembrando que se estiver usando o docker, basta usar no seu terminal interativo do node.
+  
   <br>
 </details>
 
