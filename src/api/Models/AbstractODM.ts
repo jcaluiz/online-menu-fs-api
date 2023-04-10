@@ -1,5 +1,20 @@
 import { Model, Schema, isValidObjectId, model, models } from 'mongoose';
 
+/**
+ * @author Luiz Alberto Carreiro Junior
+ * 
+ * @description Abstract class for model used to populate the database
+ * @argument T Receives an interface referring to the concrete class
+ * 
+ * @protected schema
+ * @public model
+ * @protected modelName
+ * 
+ * @method create(): Create a document in mongodb
+ * @method findAll(): Finds all documents in mongodb
+ * @method findById(): Find a document in mongodb by ID
+ */
+
 export default abstract class AbstractODM<T> {
   protected schema: Schema;
   public model: Model<T>;
