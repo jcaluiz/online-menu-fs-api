@@ -146,6 +146,8 @@ Depois de ter feito todas as configurações do projeto, vamos a API
 
 # Executando o Projeto
 
+## Inicie o servidor com "npm run dev" na raiz do projeto
+
   <details>
  
   <summary><strong>01 - POST /auth/login - Acesso de administrador do restaurante para acessar o sistema</strong></summary>
