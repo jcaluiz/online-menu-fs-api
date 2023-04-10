@@ -1,16 +1,24 @@
+import Category from '../Domains/Category';
 import Product from '../Domains/Product';
+import { ICategory } from '../Interfaces/ICategory';
+// import { ICategory } from '../Interfaces/ICategory';
 import { IProduct } from '../Interfaces/IProduct';
+import CategoryODM from '../Models/CategoryODM';
 import ProductODM from '../Models/ProductODM';
-import HttpException from '../Utils/HttpException';
+import HttpException from '../Util/HttpException';
 import statusCodes from '../shared/statusCodes';
+import CategoryService from './CategoryService';
 
 export default class ProductService {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   private productODM: ProductODM;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  private categoryODM: CategoryODM;
   private idNotFound: string;
 
   constructor() {
     this.productODM = new ProductODM();
+    this.categoryODM = new CategoryODM();
     this.idNotFound = 'Invalid Id';
   }
 
@@ -44,13 +52,27 @@ export default class ProductService {
     }
   }
 
+  private async findCategoryName(product: IProduct) {
+    const categories = await Promise.all(product.categories.map(async (item: ICategory) => {
+      const findCategory = await this.categoryODM.findCategoryName(item.name);
+      const formatCategory: Category | null = CategoryService.categoryDomain(findCategory[0]);
+      return { name: '', parent: null, ...formatCategory };
+    }));
+    return categories;
+  }
+
   public async registerProducts(product: IProduct) {
     try {
-      const registeredProduct = await this.productODM.create(product);
-      return {
-        code: statusCodes.created,
-        message: ProductService.productDomain(registeredProduct),
+      const categories = await new ProductService().findCategoryName(product);
+      const registered = await this.productODM.create({ ...product, categories });
+      const productFormat = {
+        id: registered._id,
+        categories,
+        name: registered.name,
+        qty: registered.qty,
+        price: registered.price,
       };
+      return { code: statusCodes.created, message: productFormat };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       throw new HttpException(error.status, error.message);
@@ -76,7 +98,9 @@ export default class ProductService {
       if (Object.keys(product).length < 4) {
         throw new HttpException(statusCodes.notFound, 'Product is empty or an item is missing');
       }
-      const updatedProduct = await this.productODM.update(id, product);
+      const categories = await new ProductService().findCategoryName(product);
+      const updatedProduct = await this.productODM.update(id, { ...product, categories });
+      console.log(updatedProduct);
       if (!updatedProduct) throw new HttpException(statusCodes.notFound, 'Product Not Found');
       return { code: statusCodes.created, message: ProductService.productDomain(updatedProduct) };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,11 +1,11 @@
-import { Schema, UpdateQuery } from 'mongoose';
+import { Schema, Types, UpdateQuery } from 'mongoose';
 import { IProduct } from '../Interfaces/IProduct';
 import AbstractODM from './AbstractODM';
 
 export default class ProductODM extends AbstractODM<IProduct> {
   constructor() {
     const schema = new Schema<IProduct>({
-      categories: { type: [String], required: true },
+      categories: [{ type: Schema.Types.ObjectId, ref: 'Category', required: true }],
       name: { type: String, required: true },
       qty: { type: Number, required: true },
       price: { type: Number, required: true },
@@ -18,7 +18,11 @@ export default class ProductODM extends AbstractODM<IProduct> {
   }
 
   public async create(product: IProduct): Promise<IProduct> {
-    return this.model.create(product);
+    const productWithObjectIds = {
+      ...product,
+      categories: product.categories.map(({ id }) => new Types.ObjectId(id)),
+    };
+    return this.model.create(productWithObjectIds);
   }
 
   public async findById(id: string) {
@@ -31,9 +35,13 @@ export default class ProductODM extends AbstractODM<IProduct> {
 
   public async update(id: string, product: IProduct) {
     try {
+      const productWithObjectIds = {
+        ...product,
+        categories: product.categories.map(({ _id }) => new Types.ObjectId(_id)),
+      };
       return await this.model.findOneAndUpdate(
         { _id: id },
-        { ...product } as UpdateQuery<IProduct>,
+        { ...productWithObjectIds } as UpdateQuery<IProduct>,
         { new: true },
       );
     } catch (error) {

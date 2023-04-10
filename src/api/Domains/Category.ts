@@ -2,7 +2,7 @@ import { ICategory } from '../Interfaces/ICategory';
 
 export default class Category {
   protected id: string | undefined;
-  protected parent: ICategory | null;
+  protected parent: ICategory | null | undefined;
   protected name: string;
 
   constructor(category: ICategory) {

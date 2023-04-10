@@ -1,5 +1,5 @@
 import { ICategory } from '../Interfaces/ICategory';
-import HttpException from '../Utils/HttpException';
+import HttpException from '../Util/HttpException';
 import statusCodes from '../shared/statusCodes';
 import Category from '../Domains/Category';
 import CategoryODM from '../Models/CategoryODM';
@@ -13,7 +13,7 @@ export default class CategoryService {
     this.categoryODM = new CategoryODM();
   }
 
-  private static categoryDomain(category: ICategory | null): Category | null {
+  public static categoryDomain(category: ICategory | null): Category | null {
     if (category) {
       const newCategory = {
         _id: category._id?.toString(),

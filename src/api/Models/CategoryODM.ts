@@ -15,4 +15,8 @@ export default class CategoryODM extends AbstractODM<ICategory> {
   public async findAll() {
     return this.model.find({});
   }
+
+  public async findCategoryName(name: string) {
+    return this.model.find({ name });
+  }
 }

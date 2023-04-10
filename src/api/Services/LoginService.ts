@@ -2,7 +2,7 @@ import IUser from '../Interfaces/IUser';
 import Token from '../Middlewares/Token';
 import LoginODM from '../Models/LoginODM';
 import statusCodes from '../shared/statusCodes';
-import HttpException from '../Utils/HttpException';
+import HttpException from '../Util/HttpException';
 
 export default class LoginService {
   protected token: Token;
