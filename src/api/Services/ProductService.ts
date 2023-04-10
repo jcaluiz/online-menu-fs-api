@@ -1,7 +1,6 @@
 import Category from '../Domains/Category';
 import Product from '../Domains/Product';
 import { ICategory } from '../Interfaces/ICategory';
-// import { ICategory } from '../Interfaces/ICategory';
 import { IProduct } from '../Interfaces/IProduct';
 import CategoryODM from '../Models/CategoryODM';
 import ProductODM from '../Models/ProductODM';
@@ -62,7 +61,6 @@ export default class ProductService {
   }
 
   public async registerProducts(product: IProduct) {
-    // console.log(product);
     try {
       const categories = await new ProductService().findByCategoryName(product);
       const registered = await this.productODM.create({ ...product, categories });
@@ -73,7 +71,6 @@ export default class ProductService {
         qty: registered.qty,
         price: registered.price,
       };
-      console.log(registered);
       return { code: statusCodes.created, message: productFormat };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

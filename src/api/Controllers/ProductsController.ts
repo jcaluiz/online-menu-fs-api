@@ -26,7 +26,11 @@ export default class ProductsController {
 
   public async registerProducts() {
     try {
-      const { code, message } = await this.service.registerProducts(this.req.body);
+      let { price, ...rest } = this.req.body;
+      const priceDecimal = parseFloat(price.toFixed(2));
+      const { code, message } = await this.service.registerProducts({
+        ...rest,
+        price: priceDecimal});
       return this.res.status(code).json(message);
     } catch (error) {
       this.next(error);
